@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ShowComponentsService {
-  showAddPersonComponent: boolean = false;
+  showAddPersonComponent: boolean = true;
   showEditPersonComponent: boolean = false;
   showSearchbarComponent: boolean = false;
   showPersonListComponent: boolean = false;

@@ -1,0 +1,58 @@
+```
+<app-searchbar></app-searchbar>
+```
+<app-add-person
+  *ngIf="showComponentsService.showAddPersonComponent"
+></app-add-person>
+```
+<app-edit-person></app-edit-person>
+```
+
+<h2>This is PhoneBook</h2>
+<button (click)="handleAddPersonComponent()">Add New Person</button>
+<table>
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone Number</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>yusha</td>
+      <td>kuralay</td>
+      <td>05386470948</td>
+      <td>
+        <button>Edit</button>
+        <button>Delete</button>
+      </td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>baha</td>
+      <td>erearslan</td>
+      <td>05386470948</td>
+      <td>
+        <button>Edit</button>
+        <button>Delete</button>
+      </td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td>ahmet</td>
+      <td>güneş</td>
+      <td>05386470948</td>
+      <td>
+        <button>Edit</button>
+        <button>Delete</button>
+      </td>
+    </tr>
+  </tbody>
+
+  ```
+  <app-delete-warn></app-delete-warn>
+</table>

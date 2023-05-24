@@ -5,7 +5,9 @@
   *ngIf="showComponentsService.showAddPersonComponent"
 ></app-add-person>
 ```
-<app-edit-person></app-edit-person>
+<app-edit-person
+  *ngIf="showComponentsService.showEditPersonComponent"
+></app-edit-person>
 ```
 
 <h2>This is PhoneBook</h2>
@@ -19,40 +21,21 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody *ngFor="let person of persons">
     <tr>
-      <td>yusha</td>
-      <td>kuralay</td>
-      <td>05386470948</td>
+      <td>{{ person.firstName }}</td>
+      <td>{{ person.lastName }}</td>
+      <td>{{ person.phone }}</td>
+      <td>{{ person.birthday }}</td>
       <td>
-        <button>Edit</button>
-        <button>Delete</button>
-      </td>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <td>baha</td>
-      <td>erearslan</td>
-      <td>05386470948</td>
-      <td>
-        <button>Edit</button>
-        <button>Delete</button>
-      </td>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <td>ahmet</td>
-      <td>güneş</td>
-      <td>05386470948</td>
-      <td>
-        <button>Edit</button>
-        <button>Delete</button>
+        <button (click)="handleEditPersonComponent(person)">Edit</button>
+        <button (click)="handleDeletePersonComponent(person)">Delete</button>
       </td>
     </tr>
   </tbody>
 
   ```
-  <app-delete-warn></app-delete-warn>
+  <app-delete-warn
+    *ngIf="showComponentsService.showDeletePersonComponent"
+  ></app-delete-warn>
 </table>

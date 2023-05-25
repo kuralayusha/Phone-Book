@@ -10,9 +10,17 @@ export class ShowComponentsService {
   showDeletePersonComponent: boolean = false;
   renderPage: boolean = false;
 
-  // write a function to toggle show the add-person component
-  showAddPerson() {
-    this.showAddPersonComponent = !this.showAddPersonComponent;
+  getAddPersonComponent() {
+    return this.showAddPersonComponent;
+  }
+
+  setTrueAddPerson() {
+    this.showAddPersonComponent = true;
+    console.log('showAddPersonComponent: ' + this.showAddPersonComponent);
+  }
+
+  setFalseAddPerson() {
+    this.showAddPersonComponent = false;
     console.log('showAddPersonComponent: ' + this.showAddPersonComponent);
   }
 

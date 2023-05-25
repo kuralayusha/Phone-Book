@@ -1,5 +1,10 @@
 ```
-<app-searchbar></app-searchbar>
+<input
+  type="search"
+  placeholder="Search by name or phone"
+  [(ngModel)]="searchTerm"
+  (input)="filterContacts()"
+/>
 ```
 <app-add-person
   *ngIf="showComponentsService.showAddPersonComponent"
@@ -21,18 +26,36 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody *ngFor="let person of personsList">
-    <tr>
-      <td>{{ person.firstName }}</td>
-      <td>{{ person.lastName }}</td>
-      <td>{{ person.phone }}</td>
-      <td>{{ person.birthday }}</td>
-      <td>
-        <button (click)="handleEditPersonComponent(person)">Edit</button>
-        <button (click)="handleDeletePersonComponent(person)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
+  <div *ngIf="!filterIsActive">
+    <h4>personsList</h4>
+    <tbody *ngFor="let person of personsList">
+      <tr>
+        <td>{{ person.firstName }}</td>
+        <td>{{ person.lastName }}</td>
+        <td>{{ person.phone }}</td>
+        <td>{{ person.birthday }}</td>
+        <td>
+          <button (click)="handleEditPersonComponent(person)">Edit</button>
+          <button (click)="handleDeletePersonComponent(person)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </div>
+  <div *ngIf="filterIsActive">
+    <h4>filteredContacts</h4>
+    <tbody *ngFor="let person of filteredContacts">
+      <tr>
+        <td>{{ person.firstName }}</td>
+        <td>{{ person.lastName }}</td>
+        <td>{{ person.phone }}</td>
+        <td>{{ person.birthday }}</td>
+        <td>
+          <button (click)="handleEditPersonComponent(person)">Edit</button>
+          <button (click)="handleDeletePersonComponent(person)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </div>
 
   ```
   <app-delete-warn

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { PersonInfo } from '../interfaces/PersonInfo';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +9,7 @@ export class DataService {
   private storageKey = 'phoneBookData'; // Adjust the storage key according to your application
   private dataUpdateSubject = new Subject<void>();
   setDatas(data: any[]) {
-    const existingData = this.getDatas() || [];
-    const newData = [...existingData, ...data];
+    const newData = [...data];
     localStorage.setItem(this.storageKey, JSON.stringify(newData));
     this.dataUpdateSubject.next();
   }
@@ -20,7 +20,8 @@ export class DataService {
   }
 
   addPersonToData(person: any) {
-    const newData = [person];
+    const data = this.getDatas();
+    const newData = [...data, person];
     this.setDatas(newData);
   }
 
@@ -35,7 +36,7 @@ export class DataService {
     this.setDatas(updatedData);
   }
 
-  deletePersonFromData(personId: string) {
+  deletePersonFromData(personId: any) {
     const data = this.getDatas();
     const updatedData = data.filter((person) => person.id !== personId);
     this.setDatas(updatedData);

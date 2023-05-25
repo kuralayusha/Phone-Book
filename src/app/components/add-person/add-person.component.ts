@@ -13,7 +13,6 @@ import { PersonInfo } from 'src/app/interfaces/PersonInfo';
 })
 export class AddPersonComponent {
   dataService = new DataService();
-  showComponentsService = new ShowComponentsService();
   createdPerson: PersonInfo = {
     id: null,
     firstName: '',
@@ -21,23 +20,28 @@ export class AddPersonComponent {
     phone: '',
     birthday: null,
   };
+  showAddComponent: boolean = this.showComponentsService.getAddPersonComponent();
 
   constructor(
-    dataService: DataService,
-    personService: PersonService,
-    showComponentsService: ShowComponentsService
+    private showComponentsService: ShowComponentsService
   ) {
+    this.showAddComponent = this.showComponentsService.getAddPersonComponent();
     console.log(this.createdPerson);
   }
 
   onAdd() {
-    this.createdPerson.id = this.dataService.createId();
     if (this.createdPerson.firstName && this.createdPerson.phone) {
+      this.createdPerson.id = this.dataService.createId();
       this.dataService.addPersonToData(this.createdPerson);
+      this.showAddComponent = false;
+      
     }
     console.log(this.createdPerson);
-    this.showComponentsService.renderPageFunc();
+
   }
 
-  onCancel() {}
+  onCancel() {
+    console.log(this.showAddComponent);
+    this.showComponentsService.setFalseAddPerson();
+  }
 }

@@ -16,34 +16,68 @@ export class PhoneBookComponent implements DoCheck {
   showComponentsService = new ShowComponentsService();
   personsList: PersonInfo[] = [];
   dataUpdateSubscription: Subscription = new Subscription();
-  renderPage = this.showComponentsService.renderPageFunc();
+  showAddPersonComponent: boolean = false;
+  searchTerm: string = '';
+  filteredContacts: any[] = []
+  filterIsActive: boolean = false;
+
+
+  filterContacts() {
+    this.filteredContacts = this.personsList.filter(contact =>
+      contact.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        contact.lastName.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+    console.log(this.filteredContacts);
+    
+  }
+  
 
   constructor(
     private personService: PersonService,
     private dataService: DataService
-  ) {}
+  ) {
+    this.personsList = this.dataService.getDatas();
+    this.filteredContacts = this.personsList;
+    // const storedContacts = localStorage.getItem('phoneBookData');
+    // if (storedContacts) {
+    //   this.personsList = JSON.parse(storedContacts);
+    // }
+    
+  }
 
+  checkFilter() {
+    if (this.searchTerm) {
+      this.filterIsActive = true;
+    } else {
+      this.filterIsActive = false;
+    }
+  }
+  
   ngDoCheck(): void {
     this.loadData();
+    console.log(this.personsList.length, this.filteredContacts.length);
+    this.checkFilter();
   }
 
   handleAddPersonComponent() {
-    this.showComponentsService.showAddPerson();
+    this.showComponentsService.setTrueAddPerson();
   }
 
   handleEditPersonComponent(person: PersonInfo) {
     this.showComponentsService.showEditPerson();
-    // write a function that will take the person object and sends it to the edit-person component
     this.personService.setSelectedPerson(person);
     console.log(person);
   }
 
   handleDeletePersonComponent(person: PersonInfo) {
     this.showComponentsService.showDeletePerson();
+    this.personService.setSelectedPerson(person);
     console.log(person);
   }
 
   loadData() {
     this.personsList = this.dataService.getDatas();
   }
+
+  
 }

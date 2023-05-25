@@ -4,20 +4,20 @@
   <input
     type="text"
     name="personFirstName"
-    [(ngModel)]="selectedPerson!.firstName"
+    [(ngModel)]="changedPerson!.firstName"
     required
   />
   <label for="personLastName">Last Name:</label>
   <input
     type="text"
     name="personLastName"
-    [(ngModel)]="selectedPerson!.lastName"
+    [(ngModel)]="changedPerson!.lastName"
   />
   <label for="personPhoneNumber">Phone Number:</label>
   <input
     type="number"
     name="personPhoneNumber"
-    [(ngModel)]="selectedPerson!.phone"
+    [(ngModel)]="changedPerson!.phone"
     placeholder="+90(5**)*** ** **"
     required
   />
@@ -25,7 +25,7 @@
   <input
     type="date"
     name="personBirthday"
-    [(ngModel)]="selectedPerson!.birthday"
+    [(ngModel)]="changedPerson!.birthday"
   />
   <button type="button" (click)="onSave()">Save</button>
   <button type="button" (click)="onCancel()">Cancel</button>

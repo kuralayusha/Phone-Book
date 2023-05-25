@@ -1,24 +1,32 @@
 <h2>Edit Person</h2>
-<form *ngIf="person">
+<form>
   <label for="personName">First Name:</label>
   <input
     type="text"
     name="personFirstName"
-    [(ngModel)]="person!.firstName"
+    [(ngModel)]="selectedPerson!.firstName"
     required
   />
   <label for="personLastName">Last Name:</label>
-  <input type="text" name="personLastName" [(ngModel)]="person!.lastName" />
+  <input
+    type="text"
+    name="personLastName"
+    [(ngModel)]="selectedPerson!.lastName"
+  />
   <label for="personPhoneNumber">Phone Number:</label>
   <input
     type="number"
     name="personPhoneNumber"
-    [(ngModel)]="person!.phone"
+    [(ngModel)]="selectedPerson!.phone"
     placeholder="+90(5**)*** ** **"
     required
   />
   <label for="personBirthday">Birthday:</label>
-  <input type="date" name="personBirthday" [(ngModel)]="person!.birthday" />
-  <button type="button" (click)="savePersonChanges()">Save</button>
-  <button type="button" (click)="cancelEdit()">Cancel</button>
+  <input
+    type="date"
+    name="personBirthday"
+    [(ngModel)]="selectedPerson!.birthday"
+  />
+  <button type="button" (click)="onSave()">Save</button>
+  <button type="button" (click)="onCancel()">Cancel</button>
 </form>

@@ -1,23 +1,18 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PersonService {
-  public selectedPersonId: any;
+  private selectedPerson: any;
 
-  // its a function to select a persons id to print it out in the edit-person component
-   selectPerson(person: any) {
-    this.selectedPersonId = person.id;
-    console.log("selectedPersonID: " + this.selectedPersonId);
-    return this.selectedPersonId;
+  constructor() {}
+
+  setSelectedPerson(person: any) {
+    this.selectedPerson = person;
   }
 
   getSelectedPerson() {
-    if (this.selectedPersonId) {
-      return this.selectedPersonId;
-    }
+    return this.selectedPerson;
   }
-
-  constructor() {}
 }

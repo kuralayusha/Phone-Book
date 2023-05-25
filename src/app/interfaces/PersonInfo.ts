@@ -1,7 +1,7 @@
 export interface PersonInfo {
-    id: number;
-    firstName: string;
-    lastName: string;
-    phone: string;
-    birthday: string;
+  id: number | null;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  birthday: Date | null;
 }

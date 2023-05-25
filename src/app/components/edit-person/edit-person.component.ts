@@ -1,41 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import {PERSONS} from "../../mock-person"
+import { PERSONS } from '../../mock-person';
 import { PersonService } from 'src/app/services/person.service';
-import {PersonInfo} from "src/app/interfaces/PersonInfo"
+import { PersonInfo } from 'src/app/interfaces/PersonInfo';
 import { find } from 'rxjs';
 @Component({
   selector: 'app-edit-person',
   templateUrl: './edit-person.component.html',
-  styleUrls: ['./edit-person.component.css']
+  styleUrls: ['./edit-person.component.css'],
 })
 export class EditPersonComponent implements OnInit {
-  id: any = false;
-  persons: PersonInfo[] = PERSONS;
-  personService = new PersonService();
-  person: any = null
+  selectedPerson: any;
 
-  constructor() {
-    this.id = this.personService.getSelectedPerson();
-    this.id && this.findPersonInfo(this.id)
-    
-    console.log("id: " + this.id);
-    console.log("person: " + this.person);
-    
+  constructor(private personService: PersonService) {
+    this.selectedPerson = this.personService.getSelectedPerson();
+    console.log(this.selectedPerson);
   }
 
-  findPersonInfo(id: number) {
-    this.person = this.persons.find(person => person.id === id);
+  onSave() {
+    // TODO: save the person
   }
 
-  ngOnInit(): void {
-    
-  }
-  
-  savePersonChanges() {
-    // Burada, yapılan değişiklikleri kaydetmek için gerekli işlemleri gerçekleştirebilirsiniz.
+  onCancel() {
+    // TODO: cancel the edit
   }
 
-  cancelEdit() {
-    // Burada, düzenleme işlemini iptal etmek için gerekli işlemleri gerçekleştirebilirsiniz.
-  }
+  ngOnInit(): void {}
 }

@@ -1,17 +1,33 @@
 <form>
   <label for="personName">First Name:</label>
-  <input type="text" name="personFirstName" placeholder="First Name" required />
+  <input
+    type="text"
+    name="personFirstName"
+    placeholder="First Name"
+    [(ngModel)]="createdPerson!.firstName"
+    required="required"
+  />
   <label for="personLastName">Last Name:</label>
-  <input type="text" name="personLastName" placeholder="Last Name" />
+  <input
+    type="text"
+    name="personLastName"
+    placeholder="Last Name"
+    [(ngModel)]="createdPerson!.lastName"
+  />
   <label for="personPhoneNumber">Phone Number:</label>
   <input
     type="number"
     name="personPhoneNumber"
     placeholder="+90(5**)*** ** **"
-    required
+    [(ngModel)]="createdPerson!.phone"
+    required="required"
   />
   <label for="personBirthday">Birthday:</label>
-  <input type="date" name="personBirthday" />
-  <button type="submit">Add</button>
+  <input
+    type="date"
+    name="personBirthday"
+    [(ngModel)]="createdPerson!.birthday"
+  />
+  <button type="submit" (click)="onAdd()">Add</button>
   <button type="button">Cancle</button>
 </form>

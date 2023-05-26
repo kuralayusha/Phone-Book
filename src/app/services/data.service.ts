@@ -8,6 +8,7 @@ import { PersonInfo } from '../interfaces/PersonInfo';
 export class DataService {
   private storageKey = 'phoneBookData'; // Adjust the storage key according to your application
   private dataUpdateSubject = new Subject<void>();
+  
   setDatas(data: any[]) {
     const newData = [...data];
     localStorage.setItem(this.storageKey, JSON.stringify(newData));

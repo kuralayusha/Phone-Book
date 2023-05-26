@@ -13,20 +13,23 @@ import { PersonInfo } from 'src/app/interfaces/PersonInfo';
   styleUrls: ['./phone-book.component.css'],
 })
 export class PhoneBookComponent implements DoCheck {
-  // showComponentsService = new ShowComponentsService();
-  personsList: PersonInfo[] = [];
-  dataUpdateSubscription: Subscription = new Subscription();
-  // showAddPersonComponent: boolean = false;
-  searchTerm: string = '';
+  filteredContactsList: PersonInfo[] = [];
+  contactsList: PersonInfo[] = [];
+  dataUpdateSubscription: Subscription | undefined;
+  searchTerm: any;
+
+  showAddContact: any = false;
   showEditContact: boolean = false;
   showDeleteContact: boolean = false;
 
-  
-  showAddContact: any = false;
-  showAddContactChangeMessage: any;
-
   reciveSetAddToFalse($event: any) {
     this.showAddContact = $event;
+  }
+  reciveSetEditToFalse($event: any) {
+    this.showEditContact = $event;
+  }
+  reciveSetDeleteToFalse($event: any) {
+    this.showDeleteContact = $event;
   }
 
   constructor(
@@ -36,7 +39,10 @@ export class PhoneBookComponent implements DoCheck {
   
   ngDoCheck(): void {
     this.loadData();
-    console.log(this.showAddContact);   
+    // console.log(this.showAddContact); 
+    console.log("searchTearm: "+this.searchTerm);
+    console.log(this.filteredContactsList);
+    
   }
 
   handleAddPersonComponent() {
@@ -46,17 +52,34 @@ export class PhoneBookComponent implements DoCheck {
   handleEditPersonComponent(person: PersonInfo) {
     this.showEditContact = true;
     this.personService.setSelectedPerson(person);
-    console.log(person);
+    // console.log(person);
   }
 
   handleDeletePersonComponent(person: PersonInfo) {
+    this.showDeleteContact = true;
     this.personService.setSelectedPerson(person);
-    console.log(person);
+    // console.log(person);
   }
 
   loadData() {
-    this.personsList = this.dataService.getDatas();
+    this.contactsList = this.dataService.getDatas();
   }
 
-  
+  onSearch(searchTerm: any) {
+    this.searchTerm = searchTerm;
+    this.filteredPersonsList()
+  }
+
+  filteredPersonsList() {
+    if (this.searchTerm === '') {      
+      return this.contactsList;
+    } else {
+      return this.filteredContactsList = this.contactsList.filter(person =>
+        person.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        person.lastName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        person.phone.toString().includes(this.searchTerm)
+      );
+      
+    }
+  }
 }

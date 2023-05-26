@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit, DoCheck, Output, EventEmitter } from '@angular/core';
 import { PERSONS } from '../../mock-person';
 import { PersonService } from 'src/app/services/person.service';
 import { PersonInfo } from 'src/app/interfaces/PersonInfo';
@@ -18,13 +18,13 @@ export class EditPersonComponent implements OnInit, DoCheck {
     phone: this.selectedPerson.phone,
     birthday: this.selectedPerson.birthday,
   };
+  
+  setEditToFalse: any = false;
+  @Output() messageEvent = new EventEmitter<string>();
 
 
   constructor(private personService: PersonService, private dataService: DataService) {
-    // this.selectedPerson = this.personService.getSelectedPerson();
     console.log(this.selectedPerson);
-    console.log(this.changedPerson);
-    
   }
 
   ngDoCheck(): void {
@@ -33,10 +33,11 @@ export class EditPersonComponent implements OnInit, DoCheck {
 
   onSave() {
     this.dataService.updatePersonFromData(this.changedPerson);
+    this.messageEvent.emit(this.setEditToFalse);
   }
 
   onCancel() {
-    // TODO: cancel the edit
+    this.messageEvent.emit(this.setEditToFalse);
   }
 
   ngOnInit(): void {}

@@ -1,18 +1,17 @@
 ```
+{{ showAddContactChangeMessage }}
 <input
   type="search"
   placeholder="Search by name or phone"
   [(ngModel)]="searchTerm"
-  (input)="filterContacts()"
 />
 ```
 <app-add-person
-  *ngIf="showComponentsService.showAddPersonComponent"
+  *ngIf="showAddContact"
+  (messageEvent)="reciveSetAddToFalse($event)"
 ></app-add-person>
 ```
-<app-edit-person
-  *ngIf="showComponentsService.showEditPersonComponent"
-></app-edit-person>
+<app-edit-person *ngIf="showEditContact"></app-edit-person>
 ```
 
 <h2>This is PhoneBook</h2>
@@ -26,7 +25,7 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <div *ngIf="!filterIsActive">
+  <div>
     <h4>personsList</h4>
     <tbody *ngFor="let person of personsList">
       <tr>
@@ -41,24 +40,6 @@
       </tr>
     </tbody>
   </div>
-  <div *ngIf="filterIsActive">
-    <h4>filteredContacts</h4>
-    <tbody *ngFor="let person of filteredContacts">
-      <tr>
-        <td>{{ person.firstName }}</td>
-        <td>{{ person.lastName }}</td>
-        <td>{{ person.phone }}</td>
-        <td>{{ person.birthday }}</td>
-        <td>
-          <button (click)="handleEditPersonComponent(person)">Edit</button>
-          <button (click)="handleDeletePersonComponent(person)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </div>
-
   ```
-  <app-delete-warn
-    *ngIf="showComponentsService.showDeletePersonComponent"
-  ></app-delete-warn>
+  <app-delete-warn *ngIf="showDeleteContact"></app-delete-warn>
 </table>

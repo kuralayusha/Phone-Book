@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 import { ShowComponentsService } from 'src/app/services/show-components.service';
 import { PersonService } from 'src/app/services/person.service';
@@ -12,6 +12,13 @@ import { PersonInfo } from 'src/app/interfaces/PersonInfo';
   styleUrls: ['./add-person.component.css'],
 })
 export class AddPersonComponent {
+  
+  setAddToFalse: any = false;
+
+  @Output() messageEvent = new EventEmitter<string>();
+
+
+  
   dataService = new DataService();
   createdPerson: PersonInfo = {
     id: null,
@@ -20,28 +27,22 @@ export class AddPersonComponent {
     phone: '',
     birthday: null,
   };
-  showAddComponent: boolean = this.showComponentsService.getAddPersonComponent();
 
   constructor(
     private showComponentsService: ShowComponentsService
-  ) {
-    this.showAddComponent = this.showComponentsService.getAddPersonComponent();
-    console.log(this.createdPerson);
-  }
+  ) {}
 
   onAdd() {
     if (this.createdPerson.firstName && this.createdPerson.phone) {
       this.createdPerson.id = this.dataService.createId();
       this.dataService.addPersonToData(this.createdPerson);
-      this.showAddComponent = false;
-      
+      this.messageEvent.emit(this.setAddToFalse);      
+    } else {
+      alert('Please enter a name and a phone number!');
     }
-    console.log(this.createdPerson);
-
   }
 
   onCancel() {
-    console.log(this.showAddComponent);
-    this.showComponentsService.setFalseAddPerson();
+    this.messageEvent.emit(this.setAddToFalse);
   }
 }

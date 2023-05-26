@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ShowComponentsService } from 'src/app/services/show-components.service';
@@ -13,64 +13,43 @@ import { PersonInfo } from 'src/app/interfaces/PersonInfo';
   styleUrls: ['./phone-book.component.css'],
 })
 export class PhoneBookComponent implements DoCheck {
-  showComponentsService = new ShowComponentsService();
+  // showComponentsService = new ShowComponentsService();
   personsList: PersonInfo[] = [];
   dataUpdateSubscription: Subscription = new Subscription();
-  showAddPersonComponent: boolean = false;
+  // showAddPersonComponent: boolean = false;
   searchTerm: string = '';
-  filteredContacts: any[] = []
-  filterIsActive: boolean = false;
+  showEditContact: boolean = false;
+  showDeleteContact: boolean = false;
 
-
-  filterContacts() {
-    this.filteredContacts = this.personsList.filter(contact =>
-      contact.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        contact.lastName.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-    console.log(this.filteredContacts);
-    
-  }
   
+  showAddContact: any = false;
+  showAddContactChangeMessage: any;
+
+  reciveSetAddToFalse($event: any) {
+    this.showAddContact = $event;
+  }
 
   constructor(
     private personService: PersonService,
     private dataService: DataService
-  ) {
-    this.personsList = this.dataService.getDatas();
-    this.filteredContacts = this.personsList;
-    // const storedContacts = localStorage.getItem('phoneBookData');
-    // if (storedContacts) {
-    //   this.personsList = JSON.parse(storedContacts);
-    // }
-    
-  }
-
-  checkFilter() {
-    if (this.searchTerm) {
-      this.filterIsActive = true;
-    } else {
-      this.filterIsActive = false;
-    }
-  }
+  ) {}
   
   ngDoCheck(): void {
     this.loadData();
-    console.log(this.personsList.length, this.filteredContacts.length);
-    this.checkFilter();
+    console.log(this.showAddContact);   
   }
 
   handleAddPersonComponent() {
-    this.showComponentsService.setTrueAddPerson();
+    this.showAddContact = true;
   }
 
   handleEditPersonComponent(person: PersonInfo) {
-    this.showComponentsService.showEditPerson();
+    this.showEditContact = true;
     this.personService.setSelectedPerson(person);
     console.log(person);
   }
 
   handleDeletePersonComponent(person: PersonInfo) {
-    this.showComponentsService.showDeletePerson();
     this.personService.setSelectedPerson(person);
     console.log(person);
   }

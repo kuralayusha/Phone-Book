@@ -1,9 +1,12 @@
 <div>
-  <h2>
-    Are you sure you want to delete
-    {{ selectedPerson.firstName | uppercase }}
-    {{ selectedPerson.lastName | uppercase }} ?
-  </h2>
+  <h4>
+    Are you sure to delete
+    <span>
+      {{ selectedPerson.firstName | uppercase }}
+      {{ selectedPerson.lastName | uppercase }}
+    </span>
+    ?
+  </h4>
   <div class="btn-group">
     <button class="btn btn-danger" (click)="handleDelete()">Yes</button>
     <button class="btn btn-primary" (click)="handleCancle()">No</button>

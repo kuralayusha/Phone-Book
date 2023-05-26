@@ -7,11 +7,9 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class SearchbarComponent {
   searchTerm: any = "";
-  @Output() searchEvent = new EventEmitter<any>();
   
-  ngDoCheck(): void {
-    console.log(this.searchTerm);
-  }
+  @Output() searchEvent = new EventEmitter<any>();
+
   onSearch() {
     this.searchEvent.emit(this.searchTerm);
   }

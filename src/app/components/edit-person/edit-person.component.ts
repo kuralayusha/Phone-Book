@@ -9,8 +9,10 @@ import { DataService } from 'src/app/services/data.service';
   templateUrl: './edit-person.component.html',
   styleUrls: ['./edit-person.component.css'],
 })
-export class EditPersonComponent implements OnInit, DoCheck {
+export class EditPersonComponent {
+
   selectedPerson: PersonInfo = this.personService.getSelectedPerson();
+
   changedPerson: PersonInfo = {
     id: this.selectedPerson.id,
     firstName: this.selectedPerson.firstName,
@@ -20,25 +22,18 @@ export class EditPersonComponent implements OnInit, DoCheck {
   };
   
   setEditToFalse: any = false;
+  
   @Output() messageEvent = new EventEmitter<string>();
 
-
-  constructor(private personService: PersonService, private dataService: DataService) {
-    console.log(this.selectedPerson);
-  }
-
-  ngDoCheck(): void {
-    console.log(this.changedPerson);
-  }
-
+  
   onSave() {
     this.dataService.updatePersonFromData(this.changedPerson);
     this.messageEvent.emit(this.setEditToFalse);
   }
-
+  
   onCancel() {
     this.messageEvent.emit(this.setEditToFalse);
   }
-
-  ngOnInit(): void {}
+  
+  constructor(private personService: PersonService, private dataService: DataService) {}
 }

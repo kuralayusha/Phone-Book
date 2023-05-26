@@ -1,9 +1,10 @@
-import { Component, OnInit, DoCheck, Output, EventEmitter } from '@angular/core';
-import { PERSONS } from '../../mock-person';
+import { Component, Output, EventEmitter } from '@angular/core';
+
 import { PersonService } from 'src/app/services/person.service';
-import { PersonInfo } from 'src/app/interfaces/PersonInfo';
-import { find } from 'rxjs';
 import { DataService } from 'src/app/services/data.service';
+
+import { PersonInfo } from 'src/app/interfaces/PersonInfo';
+
 @Component({
   selector: 'app-edit-person',
   templateUrl: './edit-person.component.html',

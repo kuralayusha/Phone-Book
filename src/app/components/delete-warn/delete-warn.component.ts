@@ -1,7 +1,9 @@
 import { Component,Output,EventEmitter } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
-import { PersonInfo } from 'src/app/interfaces/PersonInfo';
+
 import { PersonService } from 'src/app/services/person.service';
+import { DataService } from 'src/app/services/data.service';
+
+import { PersonInfo } from 'src/app/interfaces/PersonInfo';
 
 @Component({
   selector: 'app-delete-warn',

@@ -1,7 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { ShowComponentsService } from 'src/app/services/show-components.service';
-import { PersonService } from 'src/app/services/person.service';
 import { DataService } from 'src/app/services/data.service';
 
 import { PersonInfo } from 'src/app/interfaces/PersonInfo';
@@ -40,6 +38,6 @@ export class AddPersonComponent {
   }
 
   constructor(
-    private showComponentsService: ShowComponentsService, private dataService: DataService
+    private dataService: DataService
   ) {}
 }

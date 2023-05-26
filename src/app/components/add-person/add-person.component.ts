@@ -13,13 +13,6 @@ import { PersonInfo } from 'src/app/interfaces/PersonInfo';
 })
 export class AddPersonComponent {
   
-  setAddToFalse: any = false;
-
-  @Output() messageEvent = new EventEmitter<string>();
-
-
-  
-  dataService = new DataService();
   createdPerson: PersonInfo = {
     id: null,
     firstName: '',
@@ -28,9 +21,9 @@ export class AddPersonComponent {
     birthday: null,
   };
 
-  constructor(
-    private showComponentsService: ShowComponentsService
-  ) {}
+  setAddToFalse: any = false;
+
+  @Output() messageEvent = new EventEmitter<string>();
 
   onAdd() {
     if (this.createdPerson.firstName && this.createdPerson.phone) {
@@ -41,8 +34,12 @@ export class AddPersonComponent {
       alert('Please enter a name and a phone number!');
     }
   }
-
+  
   onCancel() {
     this.messageEvent.emit(this.setAddToFalse);
   }
+
+  constructor(
+    private showComponentsService: ShowComponentsService, private dataService: DataService
+  ) {}
 }

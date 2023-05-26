@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, DoCheck, Input } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ShowComponentsService } from 'src/app/services/show-components.service';
 import { PersonService } from 'src/app/services/person.service';
 import { DataService } from 'src/app/services/data.service';
 
@@ -13,15 +12,27 @@ import { PersonInfo } from 'src/app/interfaces/PersonInfo';
   styleUrls: ['./phone-book.component.css'],
 })
 export class PhoneBookComponent implements DoCheck {
-  filteredContactsList: PersonInfo[] = [];
+  // -> list of all contacts
   contactsList: PersonInfo[] = [];
-  dataUpdateSubscription: Subscription | undefined;
-  searchTerm: any;
 
+  //  -> subscription to dataService 
+  dataUpdateSubscription: Subscription | undefined;
+
+  // filteredContactsList -> list of filtered contacts
+  searchTerm: any;
+  filteredContactsList: PersonInfo[] = [];
+
+  // -> boolean variables to show or hide components
   showAddContact: any = false;
   showEditContact: boolean = false;
   showDeleteContact: boolean = false;
 
+  // -> loads data from dataService
+  loadData() {
+    this.contactsList = this.dataService.getDatas();
+  }
+
+  // -> recive data from child components
   reciveSetAddToFalse($event: any) {
     this.showAddContact = $event;
   }
@@ -32,17 +43,9 @@ export class PhoneBookComponent implements DoCheck {
     this.showDeleteContact = $event;
   }
 
-  constructor(
-    private personService: PersonService,
-    private dataService: DataService
-  ) {}
-  
+  // check if data is updated every time
   ngDoCheck(): void {
     this.loadData();
-    // console.log(this.showAddContact); 
-    console.log("searchTearm: "+this.searchTerm);
-    console.log(this.filteredContactsList);
-    
   }
 
   handleAddPersonComponent() {
@@ -52,17 +55,11 @@ export class PhoneBookComponent implements DoCheck {
   handleEditPersonComponent(person: PersonInfo) {
     this.showEditContact = true;
     this.personService.setSelectedPerson(person);
-    // console.log(person);
   }
 
   handleDeletePersonComponent(person: PersonInfo) {
     this.showDeleteContact = true;
     this.personService.setSelectedPerson(person);
-    // console.log(person);
-  }
-
-  loadData() {
-    this.contactsList = this.dataService.getDatas();
   }
 
   onSearch(searchTerm: any) {
@@ -70,6 +67,7 @@ export class PhoneBookComponent implements DoCheck {
     this.filteredPersonsList()
   }
 
+  // -> filters the list of contacts if the search term is not empty
   filteredPersonsList() {
     if (this.searchTerm === '') {      
       return this.contactsList;
@@ -82,4 +80,9 @@ export class PhoneBookComponent implements DoCheck {
       
     }
   }
+
+  constructor(
+    private personService: PersonService,
+    private dataService: DataService
+  ) {}
 }

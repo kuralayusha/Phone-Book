@@ -23,6 +23,7 @@
       <th>Actions</th>
     </tr>
   </thead>
+  <!-- all contacts -->
   <tbody *ngFor="let person of contactsList">
     <tr *ngIf="!searchTerm">
       <td>{{ person.firstName }}</td>
@@ -35,6 +36,7 @@
       </td>
     </tr>
   </tbody>
+  <!-- filtered contacts -->
   <tbody *ngFor="let person of filteredContactsList">
     <tr *ngIf="searchTerm">
       <td>{{ person.firstName }}</td>

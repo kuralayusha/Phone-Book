@@ -1,31 +1,55 @@
+<div class="blur" (click)="onCancel()"></div>
 <form>
-  <label for="personName">First Name:</label>
-  <input
-    type="text"
-    name="personFirstName"
-    [(ngModel)]="changedPerson!.firstName"
-    required
-  />
-  <label for="personLastName">Last Name:</label>
-  <input
-    type="text"
-    name="personLastName"
-    [(ngModel)]="changedPerson!.lastName"
-  />
-  <label for="personPhoneNumber">Phone Number:</label>
-  <input
-    type="number"
-    name="personPhoneNumber"
-    [(ngModel)]="changedPerson!.phone"
-    placeholder="+90(5**)*** ** **"
-    required
-  />
-  <label for="personBirthday">Birthday:</label>
-  <input
+  <h1>Edit {{ changedPerson!.firstName | uppercase }}</h1>
+  <span class="p-float-label">
+    <input
+      pInputText
+      type="text"
+      name="personFirstName"
+      [(ngModel)]="changedPerson!.firstName"
+      [required]="true"
+    />
+    <label for="personName">First Name</label>
+  </span>
+  <span class="p-float-label">
+    <input
+      pInputText
+      type="text"
+      name="personLastName"
+      [(ngModel)]="changedPerson!.lastName"
+    />
+    <label for="personLastName">Last Name</label>
+  </span>
+  <span class="p-float-label">
+    <p-inputMask
+      mask="(999) 999-9999"
+      [(ngModel)]="changedPerson!.phone"
+      placeholder="(999) 999-9999"
+      [required]="true"
+      name="personPhoneNumber"
+    ></p-inputMask>
+    <label for="personLastName">Phone Number</label>
+  </span>
+  <span class="p-float-label">
+    <p-calendar
+      type="date"
+      name="personBirthday"
+      [(ngModel)]="changedPerson!.birthday"
+      dateFormat="dd.mm.yy"
+    ></p-calendar>
+    <label for="personBirthday">{{ changedPerson!.birthday }}</label>
+  </span>
+  <!-- <input
     type="date"
     name="personBirthday"
     [(ngModel)]="changedPerson!.birthday"
-  />
-  <button type="button" (click)="onSave()">Save</button>
-  <button type="button" (click)="onCancel()">Cancel</button>
+  /> -->
+  <div class="actionBtns">
+    <p-button label="Save" (click)="onSave()"></p-button>
+    <p-button
+      label="Cancle"
+      styleClass="p-button-raised p-button-danger"
+      (click)="onCancel()"
+    ></p-button>
+  </div>
 </form>

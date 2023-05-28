@@ -1,33 +1,55 @@
+<div class="blur" (click)="onCancel()"></div>
 <form>
-  <label for="personName">First Name:</label>
-  <input
-    type="text"
-    name="personFirstName"
-    placeholder="First Name"
-    [(ngModel)]="createdPerson!.firstName"
-    required="required"
-  />
-  <label for="personLastName">Last Name:</label>
-  <input
-    type="text"
-    name="personLastName"
-    placeholder="Last Name"
-    [(ngModel)]="createdPerson!.lastName"
-  />
-  <label for="personPhoneNumber">Phone Number:</label>
-  <input
-    type="number"
-    name="personPhoneNumber"
-    placeholder="+90(5**)*** ** **"
-    [(ngModel)]="createdPerson!.phone"
-    required="required"
-  />
-  <label for="personBirthday">Birthday:</label>
-  <input
+  <h1>Add New Contact</h1>
+  <span class="p-float-label">
+    <input
+      pInputText
+      type="text"
+      name="personFirstName"
+      [(ngModel)]="createdPerson!.firstName"
+      [required]="true"
+    />
+    <label for="personName">First Name</label>
+  </span>
+  <span class="p-float-label">
+    <input
+      pInputText
+      type="text"
+      name="personLastName"
+      [(ngModel)]="createdPerson!.lastName"
+    />
+    <label for="personLastName">Last Name</label>
+  </span>
+  <span class="p-float-label">
+    <p-inputMask
+      mask="(999) 999-9999"
+      [(ngModel)]="createdPerson!.phone"
+      placeholder="(999) 999-9999"
+      [required]="true"
+      name="personPhoneNumber"
+    ></p-inputMask>
+    <label for="personLastName">Phone Number</label>
+  </span>
+  <span class="p-float-label">
+    <p-calendar
+      type="date"
+      name="personBirthday"
+      [(ngModel)]="createdPerson!.birthday"
+      dateFormat="dd.mm.yy"
+    ></p-calendar>
+    <label for="personBirthday">Birthday</label>
+  </span>
+  <!-- <input
     type="date"
     name="personBirthday"
     [(ngModel)]="createdPerson!.birthday"
-  />
-  <button type="submit" (click)="onAdd()">Add</button>
-  <button type="button" (click)="onCancel()">Cancle</button>
+  /> -->
+  <div class="actionBtns">
+    <p-button label="Add" (click)="onAdd()"></p-button>
+    <p-button
+      label="Cancle"
+      styleClass="p-button-raised p-button-danger"
+      (click)="onCancel()"
+    ></p-button>
+  </div>
 </form>

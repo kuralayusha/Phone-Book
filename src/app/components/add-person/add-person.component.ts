@@ -1,21 +1,24 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter,OnInit  } from '@angular/core';
 
 import { DataService } from 'src/app/services/data.service';
 
 import { PersonInfo } from 'src/app/interfaces/PersonInfo';
+
+import { PrimeNGConfig } from 'primeng/api';
+
 
 @Component({
   selector: 'app-add-person',
   templateUrl: './add-person.component.html',
   styleUrls: ['./add-person.component.css'],
 })
-export class AddPersonComponent {
+export class AddPersonComponent  {
   
   createdPerson: PersonInfo = {
     id: null,
     firstName: '',
     lastName: '',
-    phone: '',
+    phone: undefined,
     birthday: null,
   };
 
@@ -38,6 +41,7 @@ export class AddPersonComponent {
   }
 
   constructor(
-    private dataService: DataService
+    private dataService: DataService,
+    private primengConfig: PrimeNGConfig
   ) {}
 }

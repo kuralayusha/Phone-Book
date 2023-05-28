@@ -1,20 +1,28 @@
-<!-- invisible -->
-<app-add-person
-  *ngIf="showAddContact"
-  (messageEvent)="reciveSetAddToFalse($event)"
-></app-add-person>
-<app-edit-person
-  *ngIf="showEditContact"
-  (messageEvent)="reciveSetEditToFalse($event)"
-></app-edit-person>
-<app-delete-warn
-  *ngIf="showDeleteContact"
-  (messageEvent)="reciveSetDeleteToFalse($event)"
-></app-delete-warn>
-<!-- visible -->
-<app-searchbar (searchEvent)="onSearch($event)"></app-searchbar>
-<button (click)="handleAddPersonComponent()">Add New Person</button>
-<table>
+<div class="container">
+  <!-- invisible -->
+  <app-add-person
+    *ngIf="showAddContact"
+    (messageEvent)="reciveSetAddToFalse($event)"
+  ></app-add-person>
+  <app-edit-person
+    *ngIf="showEditContact"
+    (messageEvent)="reciveSetEditToFalse($event)"
+  ></app-edit-person>
+  <app-delete-warn
+    *ngIf="showDeleteContact"
+    (messageEvent)="reciveSetDeleteToFalse($event)"
+  ></app-delete-warn>
+  <!-- visible -->
+  <div class="nav">
+    <p-button
+      label="Add New Contact"
+      icon="pi pi-plus"
+      (click)="handleAddPersonComponent()"
+      styleClass="p-button-sm"
+    ></p-button>
+    <app-searchbar (searchEvent)="onSearch($event)"></app-searchbar>
+  </div>
+  <!-- <table>
   <thead>
     <tr>
       <th>First Name</th>
@@ -23,7 +31,6 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <!-- all contacts -->
   <tbody *ngFor="let person of contactsList">
     <tr *ngIf="!searchTerm">
       <td>{{ person.firstName }}</td>
@@ -36,7 +43,6 @@
       </td>
     </tr>
   </tbody>
-  <!-- filtered contacts -->
   <tbody *ngFor="let person of filteredContactsList">
     <tr *ngIf="searchTerm">
       <td>{{ person.firstName }}</td>
@@ -49,4 +55,95 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table> -->
+
+  <div class="card">
+    <!-- <button (click)="handleAddPersonComponent()">Add New Person</button> -->
+
+    <p-table
+      [value]="contactsList"
+      styleClass="p-datatable-striped"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      *ngIf="!searchTerm"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone Number</th>
+          <th>Birthday</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-contactsList>
+        <tr>
+          <td>{{ contactsList.firstName }}</td>
+          <td>{{ contactsList.lastName }}</td>
+          <td>{{ contactsList.phone }}</td>
+          <td>{{ contactsList.birthday }}</td>
+          <div class="actionBtns">
+            <button
+              pButton
+              icon="pi pi-user-edit"
+              style="border: none; margin-top: 5px; margin-right: 5px"
+              (click)="handleEditPersonComponent(contactsList)"
+            ></button>
+            <button
+              pButton
+              style="background-color: red; border: none"
+              icon="pi pi-trash"
+              (click)="handleDeletePersonComponent(contactsList)"
+            ></button>
+          </div>
+        </tr>
+      </ng-template>
+    </p-table>
+    <!-- filtered list -->
+    <p-table
+      [value]="filteredContactsList"
+      styleClass="p-datatable-striped"
+      [tableStyle]="{ 'min-width': '50rem' }"
+      *ngIf="searchTerm"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Phone Number</th>
+          <th>Birthday</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-filteredContactsList>
+        <tr>
+          <td>{{ filteredContactsList.firstName }}</td>
+          <td>{{ filteredContactsList.lastName }}</td>
+          <td>{{ filteredContactsList.phone }}</td>
+          <td>{{ filteredContactsList.birthday }}</td>
+          <!-- <div class="card flex justify-content-center">
+            <button (click)="handleEditPersonComponent(filteredContactsList)">
+              Edit
+            </button>
+            <button (click)="handleDeletePersonComponent(filteredContactsList)">
+              Delete
+            </button>
+          </div> -->
+          <div class="actionBtns">
+            <button
+              pButton
+              icon="pi pi-user-edit"
+              style="border: none; margin-top: 5px; margin-right: 5px"
+              (click)="handleEditPersonComponent(filteredContactsList)"
+            ></button>
+            <button
+              pButton
+              style="background-color: red; border: none"
+              icon="pi pi-trash"
+              (click)="handleDeletePersonComponent(filteredContactsList)"
+            ></button>
+          </div>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

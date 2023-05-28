@@ -75,7 +75,7 @@ export class PhoneBookComponent implements DoCheck {
       return this.filteredContactsList = this.contactsList.filter(person =>
         person.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         person.lastName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        person.phone.toString().includes(this.searchTerm)
+        person.phone?.toString().includes(this.searchTerm)
       );
       
     }

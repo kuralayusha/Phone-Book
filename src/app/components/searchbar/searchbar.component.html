@@ -1,6 +1,16 @@
-<input
+<!-- <input
   type="search"
   placeholder="Search by name or phone"
   [(ngModel)]="searchTerm"
   (input)="onSearch()"
-/>
+/> -->
+<span class="p-input-icon-left">
+  <i class="pi pi-search"></i>
+  <input
+    type="text"
+    pInputText
+    [(ngModel)]="searchTerm"
+    placeholder="Search"
+    (input)="onSearch()"
+  />
+</span>

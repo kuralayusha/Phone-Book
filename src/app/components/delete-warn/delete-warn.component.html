@@ -1,4 +1,5 @@
-<div>
+<div class="blur" (click)="handleCancle()"></div>
+<form>
   <h4>
     Are you sure to delete
     <span>
@@ -7,8 +8,18 @@
     </span>
     ?
   </h4>
-  <div class="btn-group">
-    <button class="btn btn-danger" (click)="handleDelete()">Yes</button>
-    <button class="btn btn-primary" (click)="handleCancle()">No</button>
+  <div class="actionBtns">
+    <p-button
+      label="Yes"
+      styleClass="p-button-raised p-button-danger"
+      (click)="handleDelete()"
+    ></p-button>
+    <p-button
+      label="No"
+      styleClass="p-button-raised"
+      (click)="handleCancle()"
+    ></p-button>
+    <!-- <button class="btn btn-danger" (click)="handleDelete()">Yes</button>
+    <button class="btn btn-primary" (click)="handleCancle()">No</button> -->
   </div>
-</div>
+</form>

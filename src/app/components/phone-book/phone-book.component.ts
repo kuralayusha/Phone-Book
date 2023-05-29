@@ -35,12 +35,15 @@ export class PhoneBookComponent implements DoCheck {
   // -> recive data from child components
   reciveSetAddToFalse($event: any) {
     this.showAddContact = $event;
+    this.searchTerm = '';
   }
   reciveSetEditToFalse($event: any) {
     this.showEditContact = $event;
+    this.searchTerm = '';
   }
   reciveSetDeleteToFalse($event: any) {
     this.showDeleteContact = $event;
+    this.searchTerm = '';
   }
 
   // check if data is updated every time

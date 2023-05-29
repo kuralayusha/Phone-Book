@@ -28,8 +28,12 @@ export class EditPersonComponent {
 
   
   onSave() {
+    if(this.changedPerson.firstName && this.changedPerson.phone) {
     this.dataService.updatePersonFromData(this.changedPerson);
     this.messageEvent.emit(this.setEditToFalse);
+    } else {
+      alert('Please fill in all required fields');
+    }
   }
   
   onCancel() {

@@ -22,40 +22,6 @@
     ></p-button>
     <app-searchbar (searchEvent)="onSearch($event)"></app-searchbar>
   </div>
-  <!-- <table>
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Phone Number</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let person of contactsList">
-    <tr *ngIf="!searchTerm">
-      <td>{{ person.firstName }}</td>
-      <td>{{ person.lastName }}</td>
-      <td>{{ person.phone }}</td>
-      <td>{{ person.birthday }}</td>
-      <td>
-        <button (click)="handleEditPersonComponent(person)">Edit</button>
-        <button (click)="handleDeletePersonComponent(person)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-  <tbody *ngFor="let person of filteredContactsList">
-    <tr *ngIf="searchTerm">
-      <td>{{ person.firstName }}</td>
-      <td>{{ person.lastName }}</td>
-      <td>{{ person.phone }}</td>
-      <td>{{ person.birthday }}</td>
-      <td>
-        <button (click)="handleEditPersonComponent(person)">Edit</button>
-        <button (click)="handleDeletePersonComponent(person)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table> -->
 
   <div class="card">
     <!-- <button (click)="handleAddPersonComponent()">Add New Person</button> -->
@@ -77,10 +43,14 @@
       </ng-template>
       <ng-template pTemplate="body" let-contactsList>
         <tr>
-          <td>{{ contactsList.firstName }}</td>
-          <td>{{ contactsList.lastName }}</td>
-          <td>{{ contactsList.phone }}</td>
-          <td>{{ contactsList.birthday }}</td>
+          <td>{{ contactsList.firstName | titlecase }}</td>
+          <td>{{ contactsList.lastName | titlecase }}</td>
+          <td>{{ contactsList.phone | titlecase }}</td>
+          <td>
+            {{
+              contactsList.birthday.replace("T21:00:00.000Z", "") | titlecase
+            }}
+          </td>
           <div class="actionBtns">
             <button
               pButton
@@ -116,10 +86,15 @@
       </ng-template>
       <ng-template pTemplate="body" let-filteredContactsList>
         <tr>
-          <td>{{ filteredContactsList.firstName }}</td>
-          <td>{{ filteredContactsList.lastName }}</td>
-          <td>{{ filteredContactsList.phone }}</td>
-          <td>{{ filteredContactsList.birthday }}</td>
+          <td>{{ filteredContactsList.firstName | titlecase }}</td>
+          <td>{{ filteredContactsList.lastName | titlecase }}</td>
+          <td>{{ filteredContactsList.phone | titlecase }}</td>
+          <td>
+            {{
+              filteredContactsList.birthday.replace("T21:00:00.000Z", "")
+                | titlecase
+            }}
+          </td>
           <!-- <div class="card flex justify-content-center">
             <button (click)="handleEditPersonComponent(filteredContactsList)">
               Edit

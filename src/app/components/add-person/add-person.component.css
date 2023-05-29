@@ -3,7 +3,7 @@
 }
 
 .blur {
-  position: absolute;
+  position: fixed;
   filter: blur();
   width: 100vw;
   height: 100vh;
@@ -17,7 +17,7 @@
 
 form {
   background-color: white;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

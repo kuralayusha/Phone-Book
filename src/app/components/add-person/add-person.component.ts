@@ -33,9 +33,6 @@ export class AddPersonComponent {
 
   onAdd() {
     if (this.createdPerson.firstName && this.createdPerson.phone) {
-      // if (this.createdPerson.birthday) {
-      //   this.handleBirthday(this.createdPerson.birthday);
-      // }
       this.createdPerson.id = this.dataService.createId();
       this.dataService.addPersonToData(this.createdPerson);
       this.messageEvent.emit(this.setAddToFalse);

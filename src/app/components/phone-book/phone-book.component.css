@@ -12,3 +12,15 @@
   min-width: 800px;
 }
 
+* {
+  padding: 5px !important;
+  margin: 0 !important;
+}
+
+td {
+  height: 15px !important;
+}
+
+tr:hover {
+  background-color: grey;
+}

@@ -31,26 +31,28 @@
       styleClass="p-datatable-striped"
       [tableStyle]="{ 'min-width': '50rem' }"
       *ngIf="!searchTerm"
+      [style]="{ height: '1px' }"
     >
-      <ng-template pTemplate="header">
-        <tr>
-          <th>First Name</th>
+      <ng-template pTemplate="header" [style]="{ height: '1px' }">
+        <tr style="height: 10px">
+          <th style="height: 10px">First Name</th>
           <th>Last Name</th>
           <th>Phone Number</th>
           <th>Birthday</th>
           <th>Actions</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-contactsList>
+      <ng-template pTemplate="body" let-contactsList style="height: 10px">
         <tr>
-          <td>{{ contactsList.firstName | titlecase }}</td>
+          <td style="height: 10px">{{ contactsList.firstName | titlecase }}</td>
           <td>{{ contactsList.lastName | titlecase }}</td>
           <td>{{ contactsList.phone | titlecase }}</td>
-          <td>
+          <td *ngIf="contactsList.birthday">
             {{
               contactsList.birthday.replace("T21:00:00.000Z", "") | titlecase
             }}
           </td>
+          <td *ngIf="!contactsList.birthday">-</td>
           <div class="actionBtns">
             <button
               pButton
@@ -104,10 +106,10 @@
             </button>
           </div> -->
           <div class="actionBtns">
-            <button
+            <!-- <button
               pButton
               icon="pi pi-user-edit"
-              style="border: none; margin-top: 5px; margin-right: 5px"
+              style="border: none; height: 10px"
               (click)="handleEditPersonComponent(filteredContactsList)"
             ></button>
             <button
@@ -115,7 +117,7 @@
               style="background-color: red; border: none"
               icon="pi pi-trash"
               (click)="handleDeletePersonComponent(filteredContactsList)"
-            ></button>
+            ></button> -->
           </div>
         </tr>
       </ng-template>
